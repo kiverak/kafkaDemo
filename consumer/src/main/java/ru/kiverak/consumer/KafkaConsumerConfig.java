@@ -19,11 +19,9 @@ import java.util.Map;
 public class KafkaConsumerConfig {
 
     @Bean
-    public ConsumerFactory<String, Order> consumerFactory(
-            ObjectMapper objectMapper
-    ) {
+    public ConsumerFactory<String, Order> consumerFactory(ObjectMapper objectMapper) {
         Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092,localhost:39092,localhost:49092");
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "warehouse-group");
 
         JsonDeserializer<Order> jsonDeserializer =

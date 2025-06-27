@@ -27,20 +27,22 @@ public class OrderController {
 
     @PostMapping
     public void createOrder(@RequestBody Order order) {
-        log.info("Create order called: order={}", order);
+        for (int i = 0; i < 1000; i++) {
+            log.info("Create order called: order={}", order);
 
-        int orderId = orderIdCounter.incrementAndGet();
+            int orderId = orderIdCounter.incrementAndGet();
 
-        var productName = order.product() +
-                ThreadLocalRandom.current().nextInt(100);
+            var productName = order.product() +
+                    ThreadLocalRandom.current().nextInt(100);
 
-        var orderToSave = new Order(
-                Integer.toString(orderId),
-                productName,
-                order.quantity()
-        );
+            var orderToSave = new Order(
+                    Integer.toString(orderId),
+                    productName,
+                    order.quantity()
+            );
 
-        orderService.saveOrder(orderToSave);
+            orderService.saveOrder(orderToSave);
+        }
     }
 
 }
