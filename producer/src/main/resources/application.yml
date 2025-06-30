@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: producer
+  cloud:
+    function:
+      definition: uppercase
+      web:
+        path: /uppercase
