@@ -1,4 +1,4 @@
-package ru.kiverak.producer;
+package ru.kiverak.producer.kafkaStreams;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

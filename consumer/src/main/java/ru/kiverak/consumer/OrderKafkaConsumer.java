@@ -31,4 +31,14 @@ public class OrderKafkaConsumer {
                 record.partition()
         );
     }
+
+    @KafkaListener(topics = "my-topic-new")
+    public void consumeMyTopicNew(ConsumerRecord<String, Order> record) {
+        log.info(
+                "Received my-topic-new: order={}, key={}, partition={}",
+                record.value(),
+                record.key(),
+                record.partition()
+        );
+    }
 }
