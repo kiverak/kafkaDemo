@@ -13,13 +13,22 @@ public class OrderKafkaConsumer {
     private static final Logger log = LoggerFactory.getLogger(OrderKafkaConsumer.class);
 
     @KafkaListener(topics = "orders")
-    public void consumeOrder(ConsumerRecord<String, Order> record) {
+    public void consumeOrder1(ConsumerRecord<String, Order> record) {
         log.info(
-                "Received order: order={}, key={}, partition={}",
+                "Received order1: order={}, key={}, partition={}",
                 record.value(),
                 record.key(),
                 record.partition()
         );
     }
 
+    @KafkaListener(topics = "orders", groupId = "warehouse-group-new")
+    public void consumeOrder2(ConsumerRecord<String, Order> record) {
+        log.info(
+                "Received order2: order={}, key={}, partition={}",
+                record.value(),
+                record.key(),
+                record.partition()
+        );
+    }
 }
