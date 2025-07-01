@@ -38,7 +38,8 @@ public class OrderController {
             var orderToSave = new Order(
                     Integer.toString(orderId),
                     productName,
-                    order.quantity()
+                    order.quantity(),
+                    "order started"
             );
 
             orderService.saveOrder(orderToSave);

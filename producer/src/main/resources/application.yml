@@ -3,12 +3,19 @@ spring:
     name: producer
   cloud:
     function:
-      definition: sendOrder
+      definition: sendOrder;sendOrderStatus
     stream:
       bindings:
         sendOrder-out-0:
           destination: my-topic-new
           content-type: application/json
+        sendOrderStatus-out-0:
+          destination: orders
+          content-type: application/json
+          producer:
+            partition-key-expression:
+              headers[orderId]
+            partition-count: 3
       kafka:
         binder:
           brokers: localhost:29092,localhost:39092,localhost:49092
