@@ -9,7 +9,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.util.MimeType;
 import org.springframework.util.MimeTypeUtils;
 import ru.kiverak.producer.Order;
 
@@ -31,17 +30,18 @@ public class OrderProducer {
         this.orderIdCounter = new AtomicLong();
     }
 
-//    @Scheduled(fixedDelay = 1000)
-//    public void send() {
-//        long orderId = orderIdCounter.incrementAndGet();
-//        Order order = new Order(String.valueOf(orderId), "Scheduled Widget", 3);
-//        boolean success = streamBridge.send("sendOrder-out-0", order);
-//        if (success) {
-//            log.info("✅ Order sent: {}", order);
-//        } else {
-//            log.info("❌ Failed to send order: {}", order);
-//        }
-//    }
+    @Scheduled(fixedDelay = 1000)
+    public void send() {
+        long orderId = orderIdCounter.incrementAndGet();
+        String status = new Random().nextBoolean() ? "order started" : "order completed";
+        Order order = new Order(String.valueOf(orderId), "Scheduled Widget", 3, status);
+        boolean success = streamBridge.send("sendOrder-out-0", order);
+        if (success) {
+            log.info("✅ Order sent: {}", order);
+        } else {
+            log.info("❌ Failed to send order: {}", order);
+        }
+    }
 
     @Scheduled(fixedDelay = 1000)
     public void sendOrderStatus() {
