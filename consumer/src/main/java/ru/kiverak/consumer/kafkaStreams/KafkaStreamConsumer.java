@@ -17,4 +17,12 @@ public class KafkaStreamConsumer {
             log.info("Received: {} @ product: {}, quantity: {}", order.orderId(), order.product(), order.quantity());
         };
     }
+
+    @Bean
+    public Consumer<Order> processOrderStatus() {
+        return order -> {
+            log.info("Received: {} @ product: {}, quantity: {}, status: {}",
+                    order.orderId(), order.product(), order.quantity(), order.status());
+        };
+    }
 }

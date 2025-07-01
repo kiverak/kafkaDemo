@@ -41,10 +41,10 @@ public class OrderKafkaConsumer {
 //        );
 //    }
 
-    @KafkaListener(topics = "orders", groupId = "verifier")
-    public void listen(ConsumerRecord<String, Order> record) {
-        Order payload = record.value();
-        log.info("📦 Received orderId={} with status='{}' from partition={}",
-                payload.orderId(), payload.status(), record.partition());
-    }
+//    @KafkaListener(topics = "orders", groupId = "verifier")
+//    public void listen(ConsumerRecord<String, Order> record) {
+//        Order payload = record.value();
+//        log.info("📦 Received orderId={} with status='{}' from partition={}",
+//                payload.orderId(), payload.status(), record.partition());
+//    }
 }

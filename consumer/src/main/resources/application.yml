@@ -3,12 +3,17 @@ spring:
     name: consumer
   cloud:
     function:
-      definition: processOrder
+      definition: processOrder;processOrderStatus
     stream:
       bindings:
         processOrder-in-0:
           destination: my-topic-new
           content-type: application/json
+          group: order-grp
+        processOrderStatus-in-0:
+          destination: orders
+          content-type: application/json
+          group: order-status-grp
       kafka:
         binder:
           brokers: localhost:29092,localhost:39092,localhost:49092
